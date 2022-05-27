@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        List(Library().sortedBooks /*id: \.id*/) { item in
-            BookRow(book: item)
+        NavigationView {
+            List(Library().sortedBooks /* id: \.id */) { item in
+                BookRow(book: item)
+            }
+            .navigationTitle("My Library")
         }
     }
 }
