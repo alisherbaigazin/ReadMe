@@ -8,22 +8,14 @@
 import SwiftUI
 
 struct BookRow: View {
+    @Binding var image: UIImage?
     let book: Book
     var body: some View {
-        NavigationLink(destination: Text("Second View")) {
+        NavigationLink(destination: DetailView(image: $image, book: book)) {
             HStack {
-                Book.Image(title: book.title)
-                VStack(alignment: .leading) {
-                    Text(book.title)
-                        .font(.title2)
-                    Text(book.author)
-                        .font(.title3)
-                        .foregroundColor(.secondary)
-                    Text("\(book.id)")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
-                }
-                .lineLimit(1)
+                Book.Image(title: book.title, size: 80)
+                TitleAndAuthorStack(book: book, titleFont: .title2, authorFont: .title3)
+                    .lineLimit(1)
             }
             .padding(.vertical)
         }
@@ -32,6 +24,6 @@ struct BookRow: View {
 
 struct BookRow_Previews: PreviewProvider {
     static var previews: some View {
-        BookRow(book: Book())
+        BookRow(image: .constant(nil), book: Book())
     }
 }

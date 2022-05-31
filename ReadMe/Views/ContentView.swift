@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var library = Library()
     var body: some View {
         NavigationView {
-            List(Library().sortedBooks /* id: \.id */) { item in
-                BookRow(book: item)
+            List(library.sortedBooks /* id: \.id bc it's identifiable or id:\.self bc it's hashable*/) { item in
+                BookRow(image: $library.uiImages[item], book: item)
             }
             .navigationTitle("My Library")
         }
@@ -21,5 +22,10 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.light)
+        ContentView()
+            .preferredColorScheme(.dark)
     }
 }
+
+
