@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+struct BookMark: View {
+    @State var book: Book
+    var body: some View {
+        Button {
+            book.needRead.toggle()
+        } label: {
+            Image(systemName:  book.needRead ? "bookmark" : "bookmark.fill")
+                .font(.system(size: 48, weight: .light))
+        }
+    }
+}
+
 struct TitleAndAuthorStack: View {
     let book: Book
     let titleFont: Font
@@ -18,10 +30,17 @@ struct TitleAndAuthorStack: View {
             Text(book.author)
                 .font(authorFont)
                 .foregroundColor(.secondary)
-            Text("\(book.id)")
-                .font(.caption2)
-                .foregroundColor(.secondary)
+//            Text("\(book.id)")
+//                .font(.caption2)
+//                .foregroundColor(.secondary)
         }
+    }
+}
+
+struct TextReview: View {
+    @State var book: Book
+    var body: some View {
+        TextField("Text Review", text: $book.textReview)
     }
 }
 
@@ -55,10 +74,14 @@ extension Image {
 struct Book_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            TitleAndAuthorStack(book: .init(), titleFont: .title, authorFont: .title2)
+            HStack {
+                BookMark(book: Book())
+                TitleAndAuthorStack(book: .init(), titleFont: .title, authorFont: .title2)
+            }
             Book.Image(title: Book().title)
             Book.Image(title: "")
             Book.Image(title: "📕")
+            Image(title: "Square")
         }
     }
 }

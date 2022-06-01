@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookRow: View {
     @Binding var image: UIImage?
-    let book: Book
+    var book: Book
     var body: some View {
         NavigationLink(destination: DetailView(image: $image, book: book)) {
             HStack {
@@ -17,7 +17,7 @@ struct BookRow: View {
                 TitleAndAuthorStack(book: book, titleFont: .title2, authorFont: .title3)
                     .lineLimit(1)
             }
-            .padding(.vertical)
+            .padding(.vertical, 8)
         }
     }
 }
@@ -25,5 +25,6 @@ struct BookRow: View {
 struct BookRow_Previews: PreviewProvider {
     static var previews: some View {
         BookRow(image: .constant(nil), book: Book())
+            .preferredColorScheme(.dark)
     }
 }

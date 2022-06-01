@@ -11,7 +11,9 @@ import Foundation
 struct Book: Hashable, Identifiable {
     let title: String
     let author: String
-    let id = UUID() //no need to note id: \.id in List(Contentview) because Book is Identifiable and has unique id property.
+    let id = UUID() //RANDOM ID _ no need to note id: \.id in List(Contentview) because Book is Identifiable and has unique id property.
+    var needRead: Bool
+    var textReview: String
 
 // without extension of Book, need import SwiftUI for Image View and etc.
     
@@ -30,10 +32,10 @@ struct Book: Hashable, Identifiable {
 //        }
 //    }
     
-    init(title: String = "Title", author: String = "Author") {
+    init(title: String = "Title", author: String = "Author", needRead: Bool = true, textReview: String = "") {
         self.title = title
         self.author = author
+        self.needRead = needRead
+        self.textReview = textReview
     }
 }
-
-//Book.init()
